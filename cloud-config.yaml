@@ -6,12 +6,10 @@ ssh_authorized_keys:
 
 coreos:
   etcd:
-    #Cloud spesific discovery token
 	discovery: https://discovery.etcd.io/14fc4ea12a5e29505740e88ac70ed456
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
-#  fleet:
-#    suggested parameters:
+	
   units:
     - name: etcd.service
       command: start
