@@ -1,0 +1,19 @@
+#cloud-config
+
+#Public key for the master of this cloud instance
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAnRoN3Z2ib0FF+UHMePuiKPD/xiFd7rPkoTvkYs+TuGRL+w/uGvSFVPM2QbxQgE15vruPVtTQHKXy3w1Ar7h9huYgAGPhMtFXVBQzmbtWL4i3CCBkyudHUU8zfagHgdHWmPRlB4PesFNyx6gN/E/7F6nEh15I94O1Dq63MWyIShZLRjyYQOmiHOUt8TgWB15WHpAn0DMpMoe//TdcUdB57/pKdw1rjY1hwNf1qAxkF6g5APFV7I1VWCPNd7WJ79fH1F5dFypI8h6D71TnbO2thyM0EA6C1Sxu01tsCG2ZJIuB2CmB9v2Q97yFCGn9MhkGV2h2eDyaA5L8/3utSDhkuQ==
+
+coreos:
+  etcd:
+    #Cloud spesific discovery token
+	discovery: https://discovery.etcd.io/14fc4ea12a5e29505740e88ac70ed456
+    addr: $public_ipv4:4001
+    peer-addr: $public_ipv4:7001
+#  fleet:
+#    suggested parameters:
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
