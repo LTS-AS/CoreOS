@@ -4,9 +4,10 @@ CoreOS instances at CloudStack
 This code is not ready for production. The aim is to understand CoreOS and related functions.
 
 TODO:
-Explore and explain etcd
-Explore and explain fleet
-Suggest a way to install using cloud-config.yaml
+Explore fleet
+Add a docker image, https://registry.hub.docker.com/u/tinyerp/debian-odoo/
+
+
 
 Authour:
 Håvard Bondahl Line
