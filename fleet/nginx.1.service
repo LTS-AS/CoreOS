@@ -1,5 +1,5 @@
 [Unit]
-Description=Nginx web front-end
+Description=Nginx static webserver
 After=docker.service
 Requires=docker.service
  
