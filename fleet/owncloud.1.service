@@ -1,0 +1,10 @@
+[Unit]
+Description=OwnCloud server oc1
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull l3iggs/owncloud
+ExecStart=/usr/bin/docker run -rm -v /var/lib/docker/vfs/dir/oc1:/usr/share/webapps/owncloud/data --name oc1 -p 80:80 -p 443:443 l3iggs/owncloud
+ExecStop=/usr/bin/docker stop oc1
