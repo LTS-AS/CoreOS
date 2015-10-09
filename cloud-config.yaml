@@ -6,10 +6,9 @@ ssh_authorized_keys:
 
 coreos:
   etcd:
-    #Cloud spesific discovery token
-    discovery: https://discovery.etcd.io/14fc4ea12a5e29505740e88ac70ed456
-    addr: $public_ipv4:4001
-    peer-addr: $public_ipv4:7001
+    #Not using discovery token
+    addr: 172.16.1.146:4001
+    peer-addr: 172.16.1.146:7001
   update:
     reboot-strategy: reboot
   units:
