@@ -7,8 +7,7 @@ ssh_authorized_keys:
 coreos:
   etcd:
     #Not using discovery token
-    addr: 172.16.1.146:4001
-    peer-addr: 172.16.1.146:7001
+    addr: 127.0.0.1:4001
   update:
     reboot-strategy: reboot
   units:
