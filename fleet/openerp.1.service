@@ -1,0 +1,13 @@
+[Unit]
+Description=Openerp test enviroment
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull havardline/debian-openerp-no
+ExecStart=/usr/bin/docker run -d --name openerp.1.service -p 8069:8069 havardline/debian-openerp-no
+ExecStop=/usr/bin/docker stop openerp.1.service
+
+[X-Fleet]
+X-Conflicts=openerp.*.service

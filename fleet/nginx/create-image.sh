@@ -1,1 +1,1 @@
-docker build havardline/nginx .
+docker build -t havardline/nginx .
