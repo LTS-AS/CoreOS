@@ -5,6 +5,6 @@ Requires=docker.service
 
 [Service]
 TimeoutStartSec=0
-ExecStartPre=/usr/bin/docker pull l3iggs/owncloud
-ExecStart=/usr/bin/docker run -rm -v /var/lib/docker/vfs/dir/oc1:/usr/share/webapps/owncloud/data --name oc1 -p 80:80 -p 443:443 l3iggs/owncloud
+ExecStartPre=/usr/bin/docker pull havardline/debian-openerp-no
+ExecStart=/usr/bin/docker run -rm --name oc1 -p 8069:8069 havardline/debian-openerp-no
 ExecStop=/usr/bin/docker stop oc1
