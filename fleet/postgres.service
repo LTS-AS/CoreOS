@@ -1,0 +1,10 @@
+[Unit]
+Description=Postgres db
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull postgres
+ExecStart=/usr/bin/docker run -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo --name db  postgres
+ExecStop=/usr/bin/docker stop postgres.service
