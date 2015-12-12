@@ -6,5 +6,5 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=0
 ExecStartPre=/usr/bin/docker pull postgres
-ExecStart=/usr/bin/docker run -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo --name db  postgres
+ExecStart=/usr/bin/docker run --rm -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -v /home/core/postgres:/var/lib/postgresql/data --name db  postgres
 ExecStop=/usr/bin/docker stop postgres.service
