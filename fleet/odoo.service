@@ -2,16 +2,16 @@
 Description=Odoo server
 After=docker.service
 Requires=docker.service
-After=postgres.service
-Requires=postgres.service
+After=odoo.postgres.service
+Requires=odoo.postgres.service
 
 
 
 [Service]
 TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker pull odoo:8
-ExecStartPre=-/usr/bin/docker rm odoo.service
-ExecStart=/usr/bin/docker run -v /home/core/odoo/filestore:/var/lib/odoo/filestore/ -p 8069:8069 --name odoo.service --link db:db -t odoo:8
+#ExecStartPre=-/usr/bin/docker pull odoo:8
+#ExecStartPre=-/usr/bin/docker run -p 8069:8069 --name odoo.service --link odoo.postgres.service:db -t odoo:8
+ExecStart=/usr/bin/docker start odoo.service
 ExecStop=/usr/bin/docker stop odoo.service
 
 #[X-Fleet]
