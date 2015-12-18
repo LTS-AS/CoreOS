@@ -1,5 +1,5 @@
-CoreOS instances at CloudStack
-==============================
+CoreOS for LTS AS
+=================
 
 This code is not ready for production. The aim is to understand CoreOS and related functions.
 
