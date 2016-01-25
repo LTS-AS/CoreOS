@@ -1,10 +1,12 @@
 [Unit]
-Description=Postgres db
+Description=Postgres db for odoo
 After=docker.service
 Requires=docker.service
  
 [Service]
 TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill odoo.postgres.service
+ExecStartPre=-/usr/bin/docker rm odoo.postgres.service
 ExecStartPre=/usr/bin/docker pull postgres
-ExecStart=/usr/bin/docker run --rm -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -v /home/core/postgres:/var/lib/postgresql/data --name odoo.postgres.service  postgres
+ExecStart=/usr/bin/docker run -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo --name odoo.postgres.service postgres
 ExecStop=/usr/bin/docker stop odoo.postgres.service

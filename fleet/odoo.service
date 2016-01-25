@@ -5,14 +5,10 @@ Requires=docker.service
 After=odoo.postgres.service
 Requires=odoo.postgres.service
 
-
-
 [Service]
 TimeoutStartSec=0
-#ExecStartPre=-/usr/bin/docker pull odoo:8
-#ExecStartPre=-/usr/bin/docker run -p 8069:8069 --name odoo.service --link odoo.postgres.service:db -t odoo:8
-ExecStart=/usr/bin/docker start odoo.service
+ExecStartPre=-/usr/bin/docker kill odoo.service
+ExecStartPre=-/usr/bin/docker rm odoo.service
+ExecStartPre=/usr/bin/docker pull odoo:8
+ExecStart=/usr/bin/docker run -p 8069:8069 --name odoo.service --link odoo.postgres.service:db -t odoo:8
 ExecStop=/usr/bin/docker stop odoo.service
-
-#[X-Fleet]
-#X-Conflicts=openerp.*.service
