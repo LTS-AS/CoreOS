@@ -1,0 +1,6 @@
+[Unit]
+Description=Start the daily worker-container
+
+[Timer]
+OnCalendar=02:00
+Persistent=true
