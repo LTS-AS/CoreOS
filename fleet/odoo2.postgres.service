@@ -1,0 +1,8 @@
+[Unit]
+Description=Postgres db for odoo
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+ExecStart=-/usr/bin/docker start -a db2 
+ExecStop=-/usr/bin/docker stop db2
