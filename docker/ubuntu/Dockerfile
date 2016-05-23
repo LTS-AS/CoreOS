@@ -22,8 +22,8 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Setting up development enviroment
-RUN git clone https://github.com/LTS-AS/CoreOS.git  /erpconnector && \
-  git clone https://github.com/LTS-AS/ERPconnector.git /coreos
+RUN git clone https://github.com/LTS-AS/CoreOS.git  /coreos && \
+  git clone https://github.com/LTS-AS/ERPconnector.git /erpconnector
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
