@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
   
 # installing python-packages
 RUN pip install erppeek && \
-  pip install pyyml
+  pip install pyyaml
 
 # setting up SSHD. code found at https://docs.docker.com/engine/examples/running_ssh_service/
 RUN mkdir /var/run/sshd
