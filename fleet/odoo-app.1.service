@@ -1,0 +1,23 @@
+[Unit]
+Description=odoo-app.1
+After=odoo-db.1.service
+Requires=odoo-db.1.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull odoo:8
+ExecStart=/usr/bin/docker run --rm \
+	--name odoo-app.1 \
+        -e "VIRTUAL_PORT=8069" \
+        -e "VIRTUAL_HOST=bror2.lts.no,www.bror2.lts.no" \
+        -e "LETSENCRYPT_HOST=bror2.lts.no,www.bror2.lts.no" \
+        -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
+        -v /home/core/volumes/odoo/config:/etc/odoo \
+        --link odoo-db.1:db \
+	-t odoo:8
+
+
+ExecStop=/usr/bin/docker stop odoo-app.1
+ 
+[X-Fleet]
+X-Conflicts=odoo-app.*.service

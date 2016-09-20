@@ -1,0 +1,20 @@
+[Unit]
+Description=odoo-db.1.service
+After=nginx.1.service
+Requires=nginx.1.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull postgres:9.4
+ExecStart=/usr/bin/docker run --rm \
+	--name odoo-db.1 \
+	-e POSTGRES_USER=odoo \
+	-e POSTGRES_PASSWORD=odoo \
+	-e PGDATA=/var/lib/postgresql/data/odoo-data \
+	-v /home/core/volumes/data:/var/lib/postgresql/data/odoodata \
+ 	postgres:9.4
+
+ExecStop=/usr/bin/docker stop odoo-db.1
+ 
+[X-Fleet]
+X-Conflicts=odoo-db.*.service
