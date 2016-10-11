@@ -1,0 +1,22 @@
+[Unit]
+Description=nginx1-letsencrypt
+After=nginx1.service
+After=nginx1-gen.service
+Requires=nginx1.service
+Requires=nginx1-gen.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nginx1-letsencrypt
+ExecStartPre=-/usr/bin/docker rm nginx1-letsencrypt
+ExecStartPre=/usr/bin/docker pull jrcs/letsencrypt-nginx-proxy-companion
+
+ExecStart=/usr/bin/docker run \
+    --name nginx1-letsencrypt \
+    -e "NGINX_DOCKER_GEN_CONTAINER=nginx1-gen" \
+    --volumes-from nginx1 \
+    -v /home/core/volumes/proxy/certs:/etc/nginx/certs:rw \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    jrcs/letsencrypt-nginx-proxy-companion
+
+ExecStop=/usr/bin/docker stop nginx1-letsencrypt

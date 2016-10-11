@@ -1,0 +1,2 @@
+docker build -t havardline/nginx .
+docker run --name nginx.1.service -d  -p 800:80 -p 4430:443 havardline/nginx

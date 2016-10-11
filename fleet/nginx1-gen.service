@@ -1,0 +1,18 @@
+[Unit]
+Description=nginx1-gen
+After=nginx1.service
+Requires=nginx1.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nginx1-gen
+ExecStartPre=-/usr/bin/docker rm nginx1-gen
+ExecStartPre=/usr/bin/docker pull jwilder/docker-gen
+ExecStart=/usr/bin/docker run \
+    --name nginx1-gen \
+    --volumes-from nginx1 \
+    -v /home/core/volumes/proxy/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro \
+    -v /var/run/docker.sock:/tmp/docker.sock:ro \
+    -t jwilder/docker-gen -notify-sighup nginx1 -watch -only-exposed -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+
+ExecStop=/usr/bin/docker stop nginx1-gen

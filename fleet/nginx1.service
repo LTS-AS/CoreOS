@@ -1,20 +1,16 @@
 [Unit]
-Description=Nginx static webserver
-After=docker.service
-Requires=docker.service
+Description=nginx1
  
 [Service]
 TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill nginx1
+ExecStartPre=-/usr/bin/docker rm nginx1
 ExecStartPre=/usr/bin/docker pull nginx
-ExecStart=/usr/bin/docker run --rm -p 80:80 -p 443:443 \
-    --name nginx \
+ExecStart=/usr/bin/docker run -p 80:80 -p 443:443 \
+    --name nginx1 \
     -v /etc/nginx/conf.d  \
     -v /etc/nginx/vhost.d \
     -v /usr/share/nginx/html \
     -v /home/core/volumes/proxy/certs:/etc/nginx/certs:ro \
     nginx
-
-ExecStop=/usr/bin/docker stop nginx
- 
-[X-Fleet]
-X-Conflicts=nginx.*.service
+ExecStop=/usr/bin/docker stop nginx1
