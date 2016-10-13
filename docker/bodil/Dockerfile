@@ -7,15 +7,15 @@ RUN apt-get update && apt-get install -y \
 	python-pip \
 	vim \
 	wget
-  
-# installing python-packages
-RUN pip install erppeek && \
-	pip install voluptuous
-
-VOLUME ["/root/config"]
 
 # Setting up development enviroment
 RUN git clone https://github.com/LTS-AS/ERPconnector.git /erpconnector
+  
+# installing python-packages
+RUN pip install voluptuous && \
+	pip install pysmb
+
+VOLUME ["/root/config"]
 
 # Running scripts
-CMD ["python", "/erpconnector/src/hi.py"]
+CMD ["python", "/erpconnector/src/bodil.py"]
