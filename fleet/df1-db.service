@@ -1,0 +1,16 @@
+[Unit]
+Description=df1-db
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill df1-db
+ExecStartPre=-/usr/bin/docker rm df1-db
+ExecStartPre=/usr/bin/docker pull mysql
+ExecStart=/usr/bin/docker run \
+	--name df1-db \
+	-e "MYSQL_ROOT_PASSWORD=root" \
+	-e "MYSQL_DATABASE=dreamfactory" \
+	-e "MYSQL_USER=df_admin" \
+	-e "MYSQL_PASSWORD=df_admin" \
+ 	mysql
+ExecStop=/usr/bin/docker stop df1-db

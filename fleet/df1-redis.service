@@ -1,0 +1,12 @@
+[Unit]
+Description=df1-redis.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill df1-redis
+ExecStartPre=-/usr/bin/docker rm df1-redis
+ExecStartPre=/usr/bin/docker pull redis
+ExecStart=/usr/bin/docker run \
+	--name df1-redis \
+	redis
+ExecStop=/usr/bin/docker stop df1-redis

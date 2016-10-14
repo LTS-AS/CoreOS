@@ -5,4 +5,4 @@ Description=Starts the daily worker-container
 Type=oneshot
 # This service should start a usefull task instead of printing the date
 ExecStartPre=-/usr/bin/docker rm bodil
-ExecStart=/usr/bin/docker run --name bodil -v ~/volumes/bodil:/root/config havardline/bodil
+ExecStart=/usr/bin/docker run --name bodil -v /home/core/volumes/bodil:/root/config havardline/bodil
