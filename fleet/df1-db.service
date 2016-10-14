@@ -8,6 +8,7 @@ ExecStartPre=-/usr/bin/docker rm df1-db
 ExecStartPre=/usr/bin/docker pull mysql
 ExecStart=/usr/bin/docker run \
 	--name df1-db \
+	-v /volumes/df1/mysql:/var/lib/mysql \
 	-e "MYSQL_ROOT_PASSWORD=root" \
 	-e "MYSQL_DATABASE=dreamfactory" \
 	-e "MYSQL_USER=df_admin" \
