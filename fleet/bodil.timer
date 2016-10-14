@@ -1,0 +1,9 @@
+[Unit]
+Description=Start the daily worker-container
+
+[Timer]
+#Variant for trigging every 10 minutes bellow
+#OnCalendar=*:0/10
+#Variant for trigging once a night bellow
+OnCalendar=02:00
+Persistent=true
