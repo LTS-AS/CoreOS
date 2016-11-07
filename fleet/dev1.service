@@ -1,0 +1,9 @@
+[Unit]
+Description=dev1.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill dev1
+ExecStartPre=-/usr/bin/docker rm dev1
+ExecStart=/usr/bin/docker run --name dev1 -p 400:22 ubuntu-dev
+ExecStop=/usr/bin/docker stop dev1
