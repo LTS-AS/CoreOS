@@ -2,8 +2,10 @@
 Description=df1.service
 After=df1-db.service
 After=df1-redis.service
+After=odoo1-db.service
 Requires=df1-db.service
 Requires=df1-redis.service
+Requires=odoo1-db.service
 
 [Service]
 TimeoutStartSec=0
@@ -26,5 +28,6 @@ ExecStart=/usr/bin/docker run \
         -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
         --link df1-db:db \
         --link df1-redis:rd \
+        --link odoo1-db \
         dreamfactorysoftware/df-docker
 ExecStop=/usr/bin/docker stop df1
