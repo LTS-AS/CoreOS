@@ -14,8 +14,10 @@ ExecStartPre=-/usr/bin/docker rm df1
 ExecStartPre=/usr/bin/docker pull dreamfactorysoftware/df-docker
 ExecStart=/usr/bin/docker run \
         --name df1 \
-	-v /volumes/df1/storage:/opt/dreamfactory/storage \
-        -e "DB_HOST=db" \
+	-v /volumes/df1/storage/app:/opt/dreamfactory/storage/app \
+	-v /volumes/df1/storage/databases:/opt/dreamfactory/storage/databases \
+	-e "APP_KEY=My+Secret+appkey" \
+	-e "DB_HOST=db" \
         -e "DB_USERNAME=df_admin" \
         -e "DB_PASSWORD=df_admin" \
         -e "DB_DATABASE=dreamfactory" \
