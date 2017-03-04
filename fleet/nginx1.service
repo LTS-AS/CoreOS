@@ -11,6 +11,6 @@ ExecStart=/usr/bin/docker run -p 80:80 -p 443:443 \
     -v /etc/nginx/conf.d  \
     -v /etc/nginx/vhost.d \
     -v /usr/share/nginx/html \
-    -v /home/core/volumes/proxy/certs:/etc/nginx/certs:ro \
+    -v /volumes/nginx/certs:/etc/nginx/certs:ro \
     nginx
 ExecStop=/usr/bin/docker stop nginx1
