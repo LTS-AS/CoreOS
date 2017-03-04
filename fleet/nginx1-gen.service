@@ -11,7 +11,7 @@ ExecStartPre=/usr/bin/docker pull jwilder/docker-gen
 ExecStart=/usr/bin/docker run \
     --name nginx1-gen \
     --volumes-from nginx1 \
-    -v /home/core/volumes/proxy/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro \
+    -v /volumes/nginx/gen/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     jwilder/docker-gen \
     -notify-sighup nginx1 -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
