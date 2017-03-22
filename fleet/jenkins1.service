@@ -1,0 +1,13 @@
+[Unit]
+Description=jenkins1
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill jenkins1
+ExecStartPre=-/usr/bin/docker rm jenkins1
+ExecStartPre=/usr/bin/docker pull jenkins
+ExecStart=/usr/bin/docker run \
+	--name jenkins1 \
+        -v /volumes/jenkins1_home:/var/jenkins_home \
+	-t jenkins
+ExecStop=/usr/bin/docker stop jenkins1
