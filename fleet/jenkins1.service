@@ -8,6 +8,7 @@ ExecStartPre=-/usr/bin/docker rm jenkins1
 ExecStartPre=/usr/bin/docker pull jenkins
 ExecStart=/usr/bin/docker run \
 	--name jenkins1 \
-        -v /volumes/jenkins1_home:/var/jenkins_home \
+	-v /volumes/jenkins1_home:/var/jenkins_home \
+	-p 8000:8080 \
 	-t jenkins
 ExecStop=/usr/bin/docker stop jenkins1
