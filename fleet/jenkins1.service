@@ -8,7 +8,10 @@ ExecStartPre=-/usr/bin/docker rm jenkins1
 ExecStartPre=/usr/bin/docker pull jenkins
 ExecStart=/usr/bin/docker run \
 	--name jenkins1 \
+	-e "VIRTUAL_PORT=8081" \
+        -e "VIRTUAL_HOST=jenkins.lts.no" \
+        -e "LETSENCRYPT_HOST=jenkins.lts.no" \
+        -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
 	-v /volumes/jenkins1_home:/var/jenkins_home \
-	-p 8000:8080 \
 	-t jenkins
 ExecStop=/usr/bin/docker stop jenkins1
