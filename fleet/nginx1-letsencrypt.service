@@ -15,7 +15,7 @@ ExecStart=/usr/bin/docker run \
     --name nginx1-letsencrypt \
     -e "NGINX_DOCKER_GEN_CONTAINER=nginx1-gen" \
     --volumes-from nginx1 \
-    -v /home/core/volumes/proxy/certs:/etc/nginx/certs:rw \
+    -v /volumes/nginx/certs:/etc/nginx/certs:rw \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     jrcs/letsencrypt-nginx-proxy-companion
 
