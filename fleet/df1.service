@@ -18,18 +18,14 @@ ExecStart=/usr/bin/docker run \
 	-v /volumes/df1/storage/databases:/opt/dreamfactory/storage/databases \
 	-e "APP_KEY=My+Secret+appkey" \
 	-e "DB_HOST=db" \
-        -e "DB_USERNAME=df_admin" \
-        -e "DB_PASSWORD=df_admin" \
-        -e "DB_DATABASE=dreamfactory" \
         -e "REDIS_HOST=rd" \
         -e "REDIS_DATABASE=0" \
-        -e "REDIS_PORT=6379" \
         -e "SERVERNAME=api.lts.no" \
         -e "VIRTUAL_HOST=api.lts.no" \
         -e "LETSENCRYPT_HOST=api.lts.no" \
         -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
         --link df1-db:db \
         --link df1-redis:rd \
-        --link odoo1-db \
+        --link odoo1-db:odoo \
         dreamfactorysoftware/df-docker
 ExecStop=/usr/bin/docker stop df1
