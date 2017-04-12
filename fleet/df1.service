@@ -26,6 +26,7 @@ ExecStart=/usr/bin/docker run \
         -e "REDIS_DATABASE=0" \
         -e "SERVERNAME=api.lts.no" \
         -e "VIRTUAL_HOST=api.lts.no" \
+        -e "VIRTUAL_PROTO=https" \
         -e "LETSENCRYPT_HOST=api.lts.no" \
         -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
         --link df1-db:db \
