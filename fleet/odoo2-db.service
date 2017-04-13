@@ -1,0 +1,16 @@
+[Unit]
+Description=odoo2-db
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill odoo2-db
+ExecStartPre=-/usr/bin/docker rm odoo2-db
+ExecStartPre=/usr/bin/docker pull postgres:9.4
+ExecStart=/usr/bin/docker run \
+	--name odoo2-db \
+	-e POSTGRES_USER=odoo \
+	-e POSTGRES_PASSWORD=odoo \
+	-e PGDATA=/var/lib/postgresql/data/odoo-data \
+	-v /volumes/odoo2/data:/var/lib/postgresql/data/odoo-data \
+ 	postgres:9.4
+ExecStop=/usr/bin/docker stop odoo2-db
