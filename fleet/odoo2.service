@@ -1,0 +1,20 @@
+[Unit]
+Description=odoo2
+After=odoo2-db.service
+Requires=odoo2-db.service
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill odoo2
+ExecStartPre=-/usr/bin/docker rm odoo2
+ExecStartPre=/usr/bin/docker pull odoo:8
+ExecStart=/usr/bin/docker run \
+	--name odoo2 \
+        -e "VIRTUAL_PORT=8069" \
+        -e "VIRTUAL_HOST=merete.lts.no" \
+        -e "LETSENCRYPT_HOST=merete.lts.no" \
+        -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
+        -v /volumes/odoo2/config:/etc/odoo \
+        --link odoo2-db:db \
+	-t odoo:8
+ExecStop=/usr/bin/docker stop odoo2
