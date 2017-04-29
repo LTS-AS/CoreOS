@@ -1,0 +1,36 @@
+[Unit]
+Description=df2.service
+After=df2-db.service
+After=df2-redis.service
+Requires=df2-db.service
+Requires=df2-redis.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill df2
+ExecStartPre=-/usr/bin/docker rm df2
+ExecStartPre=/usr/bin/docker pull dreamfactorysoftware/df-docker
+ExecStart=/usr/bin/docker run \
+        --name df2 \
+        -v /volumes/df2/storage/app:/opt/dreamfactory/storage/app \
+        -v /volumes/df2/storage/databases:/opt/dreamfactory/storage/databases \
+        -e "APP_KEY=My+Secret+appkey" \
+        -e "DB_HOST=db" \
+        -e "DB_DRIVER=pgsql" \
+        -e "DB_USERNAME=df_admin" \
+        -e "DB_PASSWORD=df_admin" \
+        -e "DB_DATABASE=dreamfactory" \
+        -e "DB_PORT=5432" \
+        -e "REDIS_HOST=rd" \
+        -e "REDIS_DATABASE=0" \
+        -e "REDIS_PORT=5432" \
+        -e "SERVERNAME=api.lts.no" \
+        -e "VIRTUAL_HOST=api.lts.no" \
+        -e "LETSENCRYPT_HOST=api.lts.no" \
+        -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
+        --link df2-db:db \
+        --link df2-redis:rd \
+        --link odoo1-db:odoo \
+        -p 85:80 \
+        dreamfactorysoftware/df-docker
+ExecStop=/usr/bin/docker stop df2
