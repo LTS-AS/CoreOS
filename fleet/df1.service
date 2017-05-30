@@ -13,7 +13,7 @@ Requires=odoo1-db.service
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill df1
 ExecStartPre=-/usr/bin/docker rm df1
-ExecStartPre=/usr/bin/docker pull dreamfactorysoftware/df-docker
+ExecStartPre=/usr/bin/docker pull dreamfactorysoftware/df-docker:2.5.0
 ExecStart=/usr/bin/docker run \
         --name df1 \
         -v /volumes/df1/storage/app:/opt/dreamfactory/storage/app \
@@ -35,5 +35,5 @@ ExecStart=/usr/bin/docker run \
         --link df1-db2:db2 \
         --link df1-redis:rd \
         --link odoo1-db:odoo \
-        dreamfactorysoftware/df-docker
+        dreamfactorysoftware/df-docker:2.5.0
 ExecStop=/usr/bin/docker stop df1
