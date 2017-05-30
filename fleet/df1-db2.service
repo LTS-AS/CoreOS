@@ -1,0 +1,16 @@
+[Unit]
+Description=df1-db2
+ 
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill df1-db2
+ExecStartPre=-/usr/bin/docker rm df1-db2
+ExecStartPre=/usr/bin/docker pull postgres:9.4
+ExecStart=/usr/bin/docker run \
+	--name df1-db2 \
+	-e POSTGRES_USER=df1 \
+	-e POSTGRES_PASSWORD=df1-pwd \
+	-e PGDATA=/var/lib/postgresql/data/df1-data \
+	-v /volumes/df1/db2:/var/lib/postgresql/data/df1-data \
+ 	postgres:9.4
+ExecStop=/usr/bin/docker stop df1-db2
