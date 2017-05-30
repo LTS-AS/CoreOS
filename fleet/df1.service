@@ -1,9 +1,11 @@
 [Unit]
 Description=df1.service
 After=df1-db.service
+After=df1-db2.service
 After=df1-redis.service
 After=odoo1-db.service
 Requires=df1-db.service
+Requires=df1-db2.service
 Requires=df1-redis.service
 Requires=odoo1-db.service
 
@@ -30,6 +32,7 @@ ExecStart=/usr/bin/docker run \
         -e "LETSENCRYPT_HOST=api.lts.no" \
         -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
         --link df1-db:db \
+        --link df1-db2:db2 \
         --link df1-redis:rd \
         --link odoo1-db:odoo \
         dreamfactorysoftware/df-docker
