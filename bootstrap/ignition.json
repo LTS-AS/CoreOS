@@ -1,0 +1,25 @@
+{
+  "ignition": {
+    "config": {},
+    "timeouts": {},
+    "version": "2.1.0"
+  },
+  "networkd": {
+    "units": [
+      {
+        "contents": "[Match]\nName=enp4s0\n\n[Network]\nDNS=192.168.1.3\nAddress=192.168.1.2/24\nGateway=192.168.1.1",
+        "name": "00-eth0.network"
+      }
+    ]
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "havard",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCDR7p9gL7GUnU1ZqsUEhiCC87VUTMwqbZOJH15bpPtB8TsbVnmpPqLLq96DB442qAJ6wy2voI7HMKi/eHD8KEb0emS7s8cx3hgvU/kkf6x5FEbXB9EWuPpgzMNkSiysB8ljykkliZzdOsiJcitGr/NNSu8g9kGAzOd9jyFkYlrVdNPN5ibMNDOYikPMox21jgK+6fcTZZ1tTu0tjUMUqWkf8LMTBz+PAnpM/MmQYa7mcMRYJ2jSHl33/o80c9NKgv/zOMgVQskj7jMVqXTlc7qYpaaJCrzvLFP3iv/KNCsx4V/EjunLzDqnDHIkNW7OVkU6x1+dCG+U+UC16TXaHkp havard@LTS.local"
+        ]
+      }
+    ]
+  }
+}
