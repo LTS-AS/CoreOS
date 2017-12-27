@@ -1,1 +1,1 @@
-coreos-install -d /dev/sda -C stable -c cloud-config.yml
+coreos-install -d /dev/sda -i ignition.json
