@@ -14,7 +14,7 @@ ExecStart=/usr/bin/docker run \
         -e "VIRTUAL_HOST=erp.lts.no" \
         -e "LETSENCRYPT_HOST=erp.lts.no" \
         -e "LETSENCRYPT_EMAIL=havard.line@lts.no" \
-        -v /volumes/odoo/config:/etc/odoo \
+        -v /volumes/odoo1/config:/etc/odoo \
         --link odoo1-db:db \
 	-t odoo:8
 ExecStop=/usr/bin/docker stop odoo1
