@@ -11,6 +11,6 @@ ExecStart=/usr/bin/docker run \
 	-e POSTGRES_USER=odoo \
 	-e POSTGRES_PASSWORD=odoo \
 	-e PGDATA=/var/lib/postgresql/data/odoo-data \
-	-v /volumes/odoo/data:/var/lib/postgresql/data/odoo-data \
+	-v /volumes/odoo1/data:/var/lib/postgresql/data/odoo-data \
  	postgres:9.4
 ExecStop=/usr/bin/docker stop odoo1-db
