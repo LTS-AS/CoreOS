@@ -7,7 +7,7 @@ The files in this folder have historically been used for fleet. Seems like fleet
 - odoo1.service
 - odoo1-db.service
 
-## Do this to activate the services
+## Routine for enabling .service files
 
 - [ ] Move file to /etc/systemd/system/
 - [ ] Test-command: sudo systemctl start <first name of file>
