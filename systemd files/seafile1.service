@@ -1,0 +1,24 @@
+[Unit]
+Description=seafile1
+ 
+[Service]
+ExecStartPre=-/usr/bin/docker kill seafile1
+ExecStartPre=-/usr/bin/docker rm seafile1
+ExecStartPre=/usr/bin/docker pull seafileltd/seafile:latest
+ExecStart=/usr/bin/docker run \
+	--name seafile1 \
+    -e SEAFILE_SERVER_LETSENCRYPT=true \
+    -e SEAFILE_SERVER_HOSTNAME=sky.lts.no \
+    -e SEAFILE_ADMIN_EMAIL=havard.line@lts.no \
+    -e SEAFILE_ADMIN_PASSWORD=a_very_secret_password \
+    -v /opt/seafile-data:/volume/seafile1 \
+    -p 80:80 \
+    -p 443:443 \
+    seafileltd/seafile:latest
+
+ExecStop=/usr/bin/docker stop seafile1
+
+[Install]
+WantedBy=multi-user.target
+
+
